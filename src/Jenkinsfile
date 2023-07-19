@@ -1,0 +1,14 @@
+pipeline{
+    agent any
+
+ stages{
+    stage("checkouts"){
+        steps{
+            script{
+                sh'mvn version'
+            }
+        }
+
+    }
+ }
+}
