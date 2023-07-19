@@ -11,7 +11,8 @@ pipeline{
     stage("checkouts"){
         steps{
             script{
-                sh'mvn version'
+                sh'mvn -v'
+                sh 'docker version'
             }
         }
 
