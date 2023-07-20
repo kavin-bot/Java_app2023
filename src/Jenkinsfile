@@ -56,5 +56,16 @@ pipeline{
             }
         }
     } 
+    stage("DockerBuild"){
+        when{ expression { params.action =='create'}}
+        steps{
+            script{
+               sh """
+
+               docker build -t dockerkavin/javaapp:${env.BUILD_ID}
+               """
+            }
+        }
+    } 
  }
 }
