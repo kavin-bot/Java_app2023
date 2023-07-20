@@ -79,5 +79,15 @@ pipeline{
             }
         }
     } 
+    stage("DockerPush"){
+        when{ expression { params.action =='create'}}
+        steps{
+            script{
+               withCredentials([usernamePassword(credentialsId: 'dockerkavin', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                sh'docker image push dockerkavin/javaapp:${env.BUILD_ID}'
+                    } 
+            }
+        }
+    } 
  }
 }
