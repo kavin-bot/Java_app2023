@@ -8,12 +8,12 @@ pipeline{
             }
         }
     } 
-   /* stage("Maven Test"){
+   stage("Maven Test"){
         steps{
             script{
-                sh 'maven test'
+                sh 'mvn test'
             }
         }
-    } */
+    } 
  }
 }
