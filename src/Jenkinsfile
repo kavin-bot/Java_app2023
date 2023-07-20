@@ -40,5 +40,13 @@ pipeline{
             }
         }
     } 
+    stage("QualityGate"){
+        when{ expression { params.action =='create'}}
+        steps{
+            script{
+                waitForQualityGate abortPipeline: false, credentialsId: 'jenkinsonar'
+            }
+        }
+    } 
  }
 }
