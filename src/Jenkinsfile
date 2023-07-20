@@ -1,24 +1,39 @@
 pipeline{
     agent any
+
+    parameters{
+        choice{name: 'action', choices: 'create\ndelete', description:'choose create/delete'}
+    }
  stages{
     stage("checkouts"){
+        when{ expression { params.action =='create'}}
         steps{
             script{
                 git branch: 'main', url: 'https://github.com/kavin-bot/Java_app2023.git'
             }
         }
     } 
-    stage("Maven Test"){
+    stage("Maven: UnitTest"){
+        when{ expression { params.action =='create'}}
         steps{
             script{
                 sh 'mvn test'
             }
         }
     }
-    stage("IntegrationTest"){
+    stage("IntegrationTest:Maven"){
+        when{ expression { params.action =='create'}}
         steps{
             script{
-                sh 'mvn verify -DskipunitTests'
+                sh 'mvn verify -DskipUnitTests'
+            }
+        }
+    } 
+    stage("StaticCodeAnalysis"){
+        when{ expression { params.action =='create'}}
+        steps{
+            script{
+                sh 'mvn clean package sonar:sonar'
             }
         }
     } 
