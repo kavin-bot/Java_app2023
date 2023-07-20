@@ -8,10 +8,17 @@ pipeline{
             }
         }
     } 
-   stage("Maven Test"){
+    stage("Maven Test"){
         steps{
             script{
                 sh 'mvn test'
+            }
+        }
+    }
+    stage("IntegrationTest"){
+        steps{
+            script{
+                sh 'mvn verify -DskipunitTests'
             }
         }
     } 
