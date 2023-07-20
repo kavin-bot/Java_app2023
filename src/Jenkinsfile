@@ -62,7 +62,7 @@ pipeline{
             script{
                sh """
 
-               docker build -t dockerkavin/javaapp:${env.BUILD_ID}
+               docker build -t dockerkavin/javaapp:${env.BUILD_ID} .
                """
             }
         }
