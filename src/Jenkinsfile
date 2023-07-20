@@ -83,8 +83,9 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{
-               withCredentials([usernamePassword(credentialsId: 'dockerkavin', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+               withCredentials([usernamePassword(credentialsId: 'dockerkavin', passwordVariable: 'KAvi@2408', usernameVariable: 'dockerkavin')]) {
                 sh """ 
+                docker login
                 docker push dockerkavin/javaapp:${env.BUILD_ID} 
                 """
                     } 
