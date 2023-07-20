@@ -1,21 +1,19 @@
 pipeline{
     agent any
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "JMaven"
-        dockerTool "JDocker"
-    }
-
  stages{
     stage("checkouts"){
         steps{
             script{
-                sh'mvn -v'
-                sh 'docker version'
+                git branch: 'main', url: 'https://github.com/kavin-bot/Java_app2023.git'
             }
         }
-
+    }
+    stage("Maven Test"){
+        steps{
+            script{
+                sh 'maven test'
+            }
+        }
     }
  }
 }
