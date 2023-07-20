@@ -85,7 +85,7 @@ pipeline{
             script{
                withCredentials([usernamePassword(credentialsId: 'dockerkavin', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                 sh """ 
-                docker image push dockerkavin/javaapp:${env.BUILD_ID} 
+                docker push dockerkavin/javaapp:${env.BUILD_ID} 
                 """
                     } 
             }
