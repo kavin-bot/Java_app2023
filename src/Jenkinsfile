@@ -1,19 +1,19 @@
 pipeline{
     agent any
  stages{
-   /* stage("checkouts"){
+    stage("checkouts"){
         steps{
             script{
                 git branch: 'main', url: 'https://github.com/kavin-bot/Java_app2023.git'
             }
         }
-    } */
-    stage("Maven Test"){
+    } 
+   /* stage("Maven Test"){
         steps{
             script{
                 sh 'maven test'
             }
         }
-    }
+    } */
  }
 }
