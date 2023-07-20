@@ -33,7 +33,10 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{
-                sh 'mvn clean package sonar:sonar'
+                withSonarQubeEnv(credentialsId: 'jenkinsonar'){
+                     sh 'mvn clean package sonar:sonar'
+                }
+                
             }
         }
     } 
