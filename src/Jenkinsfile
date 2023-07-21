@@ -86,7 +86,7 @@ pipeline{
                withCredentials([usernamePassword(credentialsId: 'dockerkavin', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                 sh """ 
                 docker login -u '$USER' -p '$PASS'
-                docker push dockerkavin/javaapp:latest 
+                docker push dockerkavin/javaapp:${env.BUILD_ID}
                 """
                     } 
             }
