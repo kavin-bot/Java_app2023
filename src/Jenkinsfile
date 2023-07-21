@@ -62,9 +62,7 @@ pipeline{
             script{
                sh """
 
-               docker build -t springboot/javaapp:${env.BUILD_ID} .
-
-              docker tag springboot/javaapp dockerkavin/javaapp:latest
+               docker build -t dockerkavin/javaapp:${env.BUILD_ID} .
                """
             }
         }
@@ -87,7 +85,7 @@ pipeline{
             script{
                withCredentials([usernamePassword(credentialsId: 'dockerkavin', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                 sh """ 
-                
+                docker login -u '$USER' -p '$PASS'
                 docker push dockerkavin/javaapp:latest 
                 """
                     } 
