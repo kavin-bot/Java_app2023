@@ -64,7 +64,7 @@ pipeline{
 
                docker build -t springboot/javaapp:${env.BUILD_ID} .
 
-              docker tag springboot dockerkavin/javaapp:latest
+              docker tag springboot/javaapp dockerkavin/javaapp:latest
                """
             }
         }
