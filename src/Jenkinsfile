@@ -39,7 +39,7 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{
-                withSonarQubeEnv(credentialsId: 'jenkinsonar'){
+                withSonarQubeEnv(credentialsId: 'sonar-api'){
                      sh 'mvn clean package sonar:sonar'
                 }
                 
@@ -50,7 +50,7 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{
-                waitForQualityGate abortPipeline: false, credentialsId: 'jenkinsonar'
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
             }
         }
     } 
