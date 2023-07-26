@@ -89,15 +89,16 @@ pipeline{
         //def docker1 =stage.DockerBuild
         //def docker2 =stage.ACR_DockerBuild
         steps{
-            script{ 
-                 if(stage.DockerBuild=='Success')
+            def image ='myacrregistryjuly27'
+    
+                 if(image!='myacrregistryjuly27')
             {
                  sh """
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
                """
             }
-            elseif(stage.ACR_DockerBuild=='Success'){
+            elseif(image =='myacrregistryjuly27'){
                 sh"""
                  trivy image $dockerImage >scan.txt
                cat scan.txt
@@ -105,7 +106,7 @@ pipeline{
             }
             }
         }
-    } 
+     
     /*stage("DockerPush"){
         when{ expression { params.action =='create'}}
         steps{
