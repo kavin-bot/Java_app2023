@@ -20,7 +20,7 @@ pipeline{
             }
         }
     } 
-    stage("Maven: UnitTest"){
+    /*stage("Maven: UnitTest"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -62,7 +62,7 @@ pipeline{
                sh 'mvn clean install'
             }
         }
-    } 
+    } /*
    /* stage("DockerBuild"){
         when{ expression { params.action =='create'}}
         steps{
@@ -83,17 +83,19 @@ pipeline{
         }
 
     }
+    def docker1 =stage.DockerBuild
     stage("DockerImagescanTrivy"){
         when{ expression { params.action =='create'}}
+       // def docker2 =stage.DockerBuild
         steps{
             script{  
                sh """
-            if("stage.DockerBuild")
+            if('$docker1')
             {
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
             }
-            elseif("stage.ACR_DockerBuild"){
+            elseif($stage.ACR_DockerBuild){
                  trivy image $dockerImage >scan.txt
                cat scan.txt
                 
