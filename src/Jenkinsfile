@@ -74,15 +74,32 @@ pipeline{
             }
         }
     } */
+    stage("ACR_DockerBuild"){
+        when{ expression { params.action =='create'}}
+        steps{
+            script{
+                dockerImage= docker.build registryname
+            }
+        }
+
+    }
     stage("DockerImagescanTrivy"){
         when{ expression { params.action =='create'}}
         steps{
             script{
-               sh """
-            
-               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
+                when(stage.DockerBuild)
+               sh "
+            {
+              trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
-               """
+            }"
+            when(stage.ACR_DockerBuild) 
+            sh"   
+            {
+               trivy image $dockerImage >scan.txt
+               cat scan.txt 
+            } 
+               "
             }
         }
     } 
@@ -100,15 +117,7 @@ pipeline{
         }
     } */
     //buil image using ACR
-    stage("ACR_DockerBuild"){
-        when{ expression { params.action =='create'}}
-        steps{
-            script{
-                dockerImage= docker.build registryname
-            }
-        }
-
-    }
+    
     //pushing the image to ACR
     stage("ACR_Dockerpush"){
         when{ expression { params.action =='create'}}
