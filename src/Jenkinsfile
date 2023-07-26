@@ -100,11 +100,11 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{  
-               sh "
+               sh """
             {
               trivy image $dockerImage >scan.txt
                cat scan.txt
-            }"
+            }"""
            
             }
         }
