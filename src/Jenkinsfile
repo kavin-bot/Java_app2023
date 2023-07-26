@@ -87,13 +87,13 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{
-                when(stage.DockerBuild)
+                if(stage.DockerBuild)
                sh "
             {
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
             }"
-            when(stage.ACR_DockerBuild) 
+           elseif(stage.ACR_DockerBuild) 
             sh"   
             {
                trivy image $dockerImage >scan.txt
