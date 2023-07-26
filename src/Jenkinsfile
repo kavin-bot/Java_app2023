@@ -86,20 +86,23 @@ pipeline{
     //def docker1 =stage.DockerBuild
     stage("DockerImagescanTrivy"){
         when{ expression { params.action =='create'}}
-       // def docker2 =stage.DockerBuild
+        def docker1 =stage.DockerBuild
+        def docker2 =stage.ACR_DockerBuild
         steps{
-            script{  
-               sh """
-            if('$stage.DockerBuild')
+            script{ 
+                 if(docker1)
             {
+                 sh "
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
+               "
             }
-            elseif($stage.ACR_DockerBuild){
+            elseif(docker2){
+                sh"
                  trivy image $dockerImage >scan.txt
                cat scan.txt
-                
-            }"""
+                "
+            }
             }
         }
     } 
