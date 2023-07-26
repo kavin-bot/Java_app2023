@@ -103,7 +103,7 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{
-                sh"az acr login --name registryname "
+                sh"az acr login --name $registryname "
                 dockerImage= docker.build registryname
             }
         }
