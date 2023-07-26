@@ -86,20 +86,18 @@ pipeline{
     stage("DockerImagescanTrivy"){
         when{ expression { params.action =='create'}}
         steps{
-            script{
-                if(stage.DockerBuild)
+            script{  
                sh "
+            if("stage.DockerBuild")
             {
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
+            }
+            elseif("stage.ACR_DockerBuild"){
+                 trivy image $dockerImage >scan.txt
+               cat scan.txt
+                
             }"
-           elseif(stage.ACR_DockerBuild) 
-            sh"   
-            {
-               trivy image $dockerImage >scan.txt
-               cat scan.txt 
-            } 
-               "
             }
         }
     } 
