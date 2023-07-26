@@ -1,16 +1,16 @@
 pipeline{
     agent any
 
-    parameters{
-        choice(name: 'action', choices: 'create\ndelete', description:'choose create/delete')
-    }
-    environments{
-        registryname="myacrregistryjuly27"
-        registrycredentials="myacrregistryjuly27"
-        registryurl="myacrregistryjuly27.azurecr.io"
-    }
+            parameters{
+                choice(name: 'action', choices: 'create\ndelete', description:'choose create/delete')
+            }
+            environment{
+                registryname = "myacrregistryjuly27"
+                registrycredentials = "myacrregistryjuly27"
+                registryurl = "myacrregistryjuly27.azurecr.io"
+            }
 
- stages{
+ stages {
     stage("checkouts"){
         when{ expression { params.action =='create'}}
         steps{
