@@ -4,12 +4,6 @@ pipeline{
     parameters{
         choice(name: 'action', choices: 'create\ndelete', description:'choose create/delete')
     }
-    environments{
-        registryname="myacrregistryjuly27"
-        registrycredentials="myacrregistryjuly27"
-        registryurl="myacrregistryjuly27.azurecr.io"
-    }
-
  stages{
     stage("checkouts"){
         when{ expression { params.action =='create'}}
@@ -62,7 +56,7 @@ pipeline{
             }
         }
     } 
-    /*stage("DockerBuild"){
+    stage("DockerBuild"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -97,29 +91,7 @@ pipeline{
                     } 
             }
         }
-    } */
-    //buil image using ACR
-    stage("ACR_DockerBuild"){
-        when{ expression { params.action =='create'}}
-        steps{
-            script{
-                dockerImage= docker.build registryname
-            }
-        }
-
-    }
-    //pushing the image to ACR
-    stage("ACR_DockerBuild"){
-        when{ expression { params.action =='create'}}
-        steps{
-            script{
-                docker.withRegistry("http://${registryurl}",registrycredentials){
-                    dockerImage.push()
-                }
-            }
-        }
-
-    }
+    } 
  }
 }
 
