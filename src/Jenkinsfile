@@ -91,7 +91,7 @@ pipeline{
         steps{
             def image ='myacrregistryjuly27'
     
-                 if(image!='myacrregistryjuly27')
+                 if(image=='dockerkavin')
             {
                  sh """
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
