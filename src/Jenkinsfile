@@ -92,16 +92,16 @@ pipeline{
             script{ 
                  if(docker1)
             {
-                 sh "
+                 sh """
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
-               "
+               """
             }
             elseif(docker2){
-                sh"
+                sh"""
                  trivy image $dockerImage >scan.txt
                cat scan.txt
-                "
+                """
             }
             }
         }
