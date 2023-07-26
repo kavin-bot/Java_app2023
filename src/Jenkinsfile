@@ -20,7 +20,7 @@ pipeline{
             }
         }
     } 
-    /*stage("Maven: UnitTest"){
+    stage("Maven: UnitTest"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -62,7 +62,7 @@ pipeline{
                sh 'mvn clean install'
             }
         }
-    } /*
+    } 
    /* stage("DockerBuild"){
         when{ expression { params.action =='create'}}
         steps{
@@ -83,30 +83,32 @@ pipeline{
         }
 
     }
-    //def docker1 =stage.DockerBuild
-    stage("DockerImagescanTrivy"){
+/*  stage("DockerImagescanTrivy"){
         when{ expression { params.action =='create'}}
-        //def docker1 =stage.DockerBuild
-        //def docker2 =stage.ACR_DockerBuild
         steps{
-            def image ='myacrregistryjuly27'
-    
-                 if(image=='dockerkavin')
+            script{  
+               sh "
             {
-                 sh """
               trivy image dockerkavin/javaapp:${env.BUILD_ID} >scan.txt
                cat scan.txt
-               """
-            }
-            elseif(image =='myacrregistryjuly27'){
-                sh"""
-                 trivy image $dockerImage >scan.txt
-               cat scan.txt
-                """
-            }
+            }"
+           
             }
         }
-     
+    } */
+    stage("DockerImagescanTrivy"){
+        when{ expression { params.action =='create'}}
+        steps{
+            script{  
+               sh "
+            {
+              trivy image $dockerImage >scan.txt
+               cat scan.txt
+            }"
+           
+            }
+        }
+    } 
     /*stage("DockerPush"){
         when{ expression { params.action =='create'}}
         steps{
@@ -120,8 +122,7 @@ pipeline{
             }
         }
     } */
-    //buil image using ACR
-    
+
     //pushing the image to ACR
     stage("ACR_Dockerpush"){
         when{ expression { params.action =='create'}}
