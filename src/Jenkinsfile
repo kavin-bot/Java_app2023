@@ -96,7 +96,7 @@ pipeline{
             }
         }
     } */
-    stage("DockerImagescanTrivy"){
+   /* stage("DockerImagescanTrivy"){
         when{ expression { params.action =='create'}}
         steps{
             script{  
@@ -108,7 +108,7 @@ pipeline{
            
             }
         }
-    } 
+    } */
     /*stage("DockerPush"){
         when{ expression { params.action =='create'}}
         steps{
