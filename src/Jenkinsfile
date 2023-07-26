@@ -19,7 +19,7 @@ pipeline{
             }
         }
     } 
-    /*stage("Maven: UnitTest"){
+    stage("Maven: UnitTest"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -53,7 +53,7 @@ pipeline{
                 waitForQualityGate abortPipeline: false, credentialsId: 'jenkinsonar'
             }
         }
-    } */
+    } 
     stage("mavenBuild"){
         when{ expression { params.action =='create'}}
         steps{
@@ -62,7 +62,7 @@ pipeline{
             }
         }
     } 
-    /*stage("DockerBuild"){
+    stage("DockerBuild"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -97,9 +97,9 @@ pipeline{
                     } 
             }
         }
-    } */
+    } 
     //buil image using ACR
-    stage("ACR_DockerBuild"){
+   /* stage("ACR_DockerBuild"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -119,7 +119,7 @@ pipeline{
             }
         }
 
-    }
+    } */
  }
 }
 
