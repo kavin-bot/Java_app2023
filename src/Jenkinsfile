@@ -10,7 +10,7 @@ pipeline{
                 registryurl = "myacrregistryjuly27.azurecr.io"
             }
 
- stages {
+  stages {
     stage("checkouts"){
         when{ expression { params.action =='create'}}
         steps{
