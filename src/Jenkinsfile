@@ -6,8 +6,9 @@ pipeline{
             }
             environment{
                 registryname = "myacrregistryjuly27"
-                registrycredentials = "myacrregistryjuly27"
-                registryurl = "myacrregistryjuly27.azurecr.io"
+                registrycredentials = 'myacrregistryjuly27'
+                registryurl = 'myacrregistryjuly27.azurecr.io'
+                dockerImage=""
             }
 
   stages {
@@ -103,7 +104,6 @@ pipeline{
         when{ expression { params.action =='create'}}
         steps{
             script{
-                sh"az acr login --name $registryname "
                 dockerImage= docker.build registryname
             }
         }
