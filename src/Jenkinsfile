@@ -19,7 +19,7 @@ pipeline{
             }
         }
     } 
-    stage("Maven: UnitTest"){
+    /*stage("Maven: UnitTest"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -97,12 +97,13 @@ pipeline{
                     } 
             }
         }
-    } 
+    } */
     //buil image using ACR
-   /* stage("ACR_DockerBuild"){
+    stage("ACR_DockerBuild"){
         when{ expression { params.action =='create'}}
         steps{
             script{
+                sh"az acr login --name registryname "
                 dockerImage= docker.build registryname
             }
         }
@@ -119,7 +120,7 @@ pipeline{
             }
         }
 
-    } */
+    } 
  }
 }
 
