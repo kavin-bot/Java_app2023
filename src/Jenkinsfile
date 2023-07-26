@@ -20,7 +20,7 @@ pipeline{
             }
         }
     } 
-    /*stage("Maven: UnitTest"){
+    stage("Maven: UnitTest"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -63,7 +63,7 @@ pipeline{
             }
         }
     } 
-    stage("DockerBuild"){
+   /* stage("DockerBuild"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -73,8 +73,8 @@ pipeline{
                """
             }
         }
-    } 
-     stage("DockerImagescanTrivy"){
+    } */
+    stage("DockerImagescanTrivy"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -86,7 +86,7 @@ pipeline{
             }
         }
     } 
-    stage("DockerPush"){
+    /*stage("DockerPush"){
         when{ expression { params.action =='create'}}
         steps{
             script{
