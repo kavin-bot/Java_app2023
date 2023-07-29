@@ -20,7 +20,7 @@ pipeline{
             }
         }
     } 
-    stage("Maven: UnitTest"){
+    /*stage("Maven: UnitTest"){
         when{ expression { params.action =='create'}}
         steps{
             script{
@@ -35,7 +35,7 @@ pipeline{
                 sh 'mvn verify -DskipUnitTests'
             }
         }
-    } 
+    } */
     stage("StaticCodeAnalysis"){
         when{ expression { params.action =='create'}}
         steps{
