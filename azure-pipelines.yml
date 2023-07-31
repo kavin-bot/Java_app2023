@@ -10,27 +10,14 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
 - task: SonarQubePrepare@5
   inputs:
-    SonarQube: 'azsonardevopsconnection'
+    SonarQube: 'SonarProjectconnection'
     scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'sonar.projectKey'
-    cliSources: '.'
+    configMode: 'file'
     extraProperties: |
-      # Additional properties that will be passed to the scanner, 
+      # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.java.binaries
+      sonar.projectKey=sonarProject_sonarProject_AYmqiJHodLUPwoyFyElg
+      sonar.projectName=sonarProject
