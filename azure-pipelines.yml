@@ -33,6 +33,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'ACRsonarProject'
-    repository: 'myacrregistryjuly27'
+    repository: 'myacrregistryjuly27/sonarjavaproject:latest'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
