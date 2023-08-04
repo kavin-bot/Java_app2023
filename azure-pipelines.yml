@@ -40,7 +40,8 @@ steps:
     sonarQubeRunAnalysis: false
 - task: Docker@2
   inputs:
-    containerRegistry: 'acr28connection'
+    containerRegistry: '28acr'
+    repository: 'myacrjuly28'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
 
