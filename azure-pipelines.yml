@@ -13,13 +13,15 @@ steps:
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'SonarProjectconnection'
-    scannerMode: 'Other'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'sonarProject_sonarProjec'
+    cliSources: '.'
     extraProperties: |
       # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=sonarProject_sonarProject_AYmqiJHodLUPwoyFyElg
-      sonar.projectName=sonarProject
+      sonar.java.binaries=.
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
@@ -32,7 +34,7 @@ steps:
     sonarQubeRunAnalysis: false
 - task: Docker@2
   inputs:
-    containerRegistry: 'ACRsonarProject'
-    repository: 'myacrregistryjuly27/sonarjavaproject:latest'
+    containerRegistry: 'acr28connection'
+    repository: 'myacrregistryjuly28/sonarjavaproject:latest'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
