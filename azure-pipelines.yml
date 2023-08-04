@@ -24,7 +24,7 @@ steps:
       sonar.java.binaries=.
 - task: SonarQubeAnalyze@5
   inputs:
-    jdkversion: 'JAVA_HOME_11_X64'
+    jdkversion: 'JAVA_HOME'
 - task: SonarQubePublish@5
   inputs:
     pollingTimeoutSec: '300'
