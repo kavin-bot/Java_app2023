@@ -34,6 +34,9 @@ steps:
 - task: SonarQubeAnalyze@5
   inputs:
     jdkversion: 'JAVA_HOME_11_X64'
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
 - task: Docker@2
   inputs:
     containerRegistry: 'ACRserconn'
