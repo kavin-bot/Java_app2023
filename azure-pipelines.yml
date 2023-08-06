@@ -13,15 +13,13 @@ steps:
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'SonarProjectconnection'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'sonarProject_sonarProjec'
-    cliSources: '.'
+    scannerMode: 'Other'
     extraProperties: |
       # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.java.binaries=.
+      sonar.projectKey=sonarProject_sonarProjec
+      sonar.projectName=sonarProject
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
